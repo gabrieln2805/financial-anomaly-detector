@@ -1,4 +1,4 @@
-# Financial Anomaly Detector
+LLM-Powered Financial Anomaly Detection
 
 > **LLM-powered anomaly detection on financial time series.**  
 > Fetches OHLCV data via Yahoo Finance, runs a Z-score + IQR ensemble across three signals (returns, volume, realized volatility), then calls Claude to explain every flagged event in plain English with a risk score.
