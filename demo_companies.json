@@ -1,0 +1,114 @@
+[
+  {
+    "ticker": "UPST", "name": "Upstart Holdings, Inc.", "sector": "Financial Services",
+    "price0": 32.0, "base_vol": 8000000, "drift": -0.20, "dvol": 0.048,
+    "shocks": {"18": -22, "55": 18, "110": -31, "190": 25, "280": -19, "390": 14, "460": -16},
+    "explanations": [
+      "Upstart's Q2 earnings revealed a sharp deterioration in loan conversion rates as rising rates pressured bank partners to tighten credit criteria. The stock fell 22% on 9x average volume as margin compression fears dominated sentiment.",
+      "A surprise partnership with a top-10 US bank sent shares surging after months of institutional concern. The deal validated Upstart's AI underwriting model and triggered a short squeeze on the heavily shorted name.",
+      "The Fed's 75bps rate hike triggered a sector-wide sell-off in fintech lenders. Upstart's fixed-rate consumer loan model faced acute margin compression fears as funding costs spiked overnight.",
+      "A quarterly beat on origination volume coupled with raised full-year guidance drove a 25% gain. Algorithmic momentum strategies amplified the move as the stock broke above its 200-day moving average for the first time in seven months.",
+      "A bulge-bracket analyst cut the price target 45%, citing deteriorating macro conditions and higher-than-expected charge-off rates. The report triggered cascading institutional sell orders into thin pre-market liquidity.",
+      "Upstart announced a strategic auto-lending partnership expanding its TAM. Dark pool activity the prior week suggested informed accumulation, and the gap-up open confirmed the catalyst as retail sentiment flipped sharply positive.",
+      "Q3 guidance was cut dramatically, citing a near-halt in bank partner loan purchases as credit markets froze. The realized volatility spike was the highest since IPO, with implied vol reaching 200%."
+    ]
+  },
+  {
+    "ticker": "AFRM", "name": "Affirm Holdings, Inc.", "sector": "Financial Services",
+    "price0": 18.0, "base_vol": 12000000, "drift": -0.05, "dvol": 0.042,
+    "shocks": {"30": 19, "88": -24, "155": 16, "220": -18, "300": 22, "370": -13, "445": 17},
+    "explanations": [
+      "Affirm disclosed an expanded partnership with Apple Pay Later, positioning it as the default BNPL provider for hundreds of millions of iPhone users. Volume hit 5x average as analysts scrambled to revise GMV estimates upward.",
+      "Rising delinquency rates in Affirm's 0%-APR loan book triggered a sharp re-rating. Investors had assumed credit quality would remain insulated from rate rises; the earnings disclosure proved otherwise, sparking a 24% single-session decline.",
+      "A new retail partnership was announced ahead of the holiday season. Options market positioning ahead of the announcement indicated informed flow, and the move exhausted significant short interest.",
+      "Credit agency Moody's placed Affirm's ABS program on negative watch, citing rising loss severities on split-pay products. The news coincided with a broader BNPL sector sell-off driven by EU regulatory scrutiny.",
+      "Affirm's CEO outlined a path to GAAP profitability at an investor day, triggering a re-rating from growth-at-any-cost to margin-expansion story. Volume was 6x the norm as long-only funds initiated positions.",
+      "A BNPL competitor's bankruptcy — the third in six months — raised systemic contagion fears. Despite Affirm's stronger balance sheet, indiscriminate sector selling drove the anomalous volume and volatility spike.",
+      "Strong holiday GMV exceeded consensus by 18%, suggesting BNPL adoption is accelerating even in a high-rate environment. Short-seller covering amplified the gap-up into a sustained multi-day rally."
+    ]
+  },
+  {
+    "ticker": "OPEN", "name": "Opendoor Technologies, Inc.", "sector": "Real Estate",
+    "price0": 4.50, "base_vol": 18000000, "drift": -0.30, "dvol": 0.055,
+    "shocks": {"25": -28, "75": 21, "135": -19, "200": 15, "265": -24, "330": 18, "420": -22},
+    "explanations": [
+      "Opendoor's Q1 results showed inventory losses exceeding $400M as home prices fell faster than the company's pricing algorithms anticipated. The 28% decline was accompanied by 8x average volume as institutional holders liquidated positions.",
+      "Housing market data showed the first month-over-month price stabilization in seven months. Opendoor management simultaneously announced inventory reduction targets, interpreted as evidence of operational discipline under pressure.",
+      "Rising mortgage rates hit 7%, the highest in 20 years, causing a dramatic slowdown in home purchase transactions. Opendoor's model requires rapid home flipping; the market priced in a prolonged operational freeze.",
+      "A sell-side analyst initiated coverage with a Buy rating and $8 price target, arguing Opendoor's AI pricing will outperform human brokers in a recovering housing market.",
+      "Opendoor disclosed a large off-market transaction selling 2,400 homes to an institutional landlord at a slight discount. While reducing balance sheet risk, investors debated whether the discount signaled deeper unrealized losses.",
+      "National Association of Realtors data showed existing home sales rising 6% month-over-month. Opendoor's high beta to housing sentiment drove an outsized positive response relative to traditional brokerages.",
+      "A class-action lawsuit alleged Opendoor systematically misled sellers about home values. The legal risk plus a broader real estate sector sell-off drove volume to 7x average as speculative longs exited positions."
+    ]
+  },
+  {
+    "ticker": "LMND", "name": "Lemonade, Inc.", "sector": "Financial Services",
+    "price0": 14.0, "base_vol": 3500000, "drift": -0.10, "dvol": 0.045,
+    "shocks": {"40": -20, "95": 24, "160": -16, "230": 19, "295": -21, "365": 15, "440": -18},
+    "explanations": [
+      "Lemonade's loss ratio deteriorated to 96% following an unusually active Atlantic hurricane season, leading to reinsurance cost increases that eroded the unit economics thesis. The AI-driven insurance narrative faced its most severe real-world stress test.",
+      "A major reinsurance treaty renewal at favorable terms surprised analysts who had modeled higher catastrophe risk premiums. Combined with strong premium-in-force growth, the news drove a 24% single-session rally on 6x volume.",
+      "State insurance regulators in three key markets scrutinized Lemonade's claims denial algorithms for potential bias. The regulatory overhang, combined with sector de-rating of high-multiple insurtechs, pressured the stock toward multi-year lows.",
+      "Lemonade's pet insurance segment reported accelerating growth, diversifying revenue away from renter's and homeowner's insurance where cat risk is highest. Investors re-engaged with the AI underwriting narrative after months of avoidance.",
+      "A short-seller report alleged Lemonade inflated in-force premiums by counting inactive policies. The stock fell 21% intraday before management issued a rebuttal; trading was temporarily halted due to circuit breakers.",
+      "Lemonade announced entry into the life insurance market via a term-life product, materially expanding its TAM. The product leverages existing AI infrastructure with minimal incremental capex — the market responded with a 15% gap-up.",
+      "Catastrophic wildfire losses in California raised fears of reserve inadequacy. The combined ratio was projected to exceed 110% for the quarter, and risk-off flows dominated the session on above-average volume."
+    ]
+  },
+  {
+    "ticker": "RIVN", "name": "Rivian Automotive, Inc.", "sector": "Consumer Cyclical",
+    "price0": 22.0, "base_vol": 35000000, "drift": -0.25, "dvol": 0.050,
+    "shocks": {"35": -25, "80": 20, "145": -18, "210": 16, "275": -22, "340": 19, "455": -20},
+    "explanations": [
+      "Rivian disclosed production ramp headwinds at its Normal, IL facility, cutting full-year guidance by 30%. The miss underscored EV manufacturing scale challenges and triggered a 25% sell-off on nearly 9x the 20-day average volume.",
+      "Amazon confirmed receipt of its first 10,000 Rivian electric delivery vans, validating the commercial vehicle segment. Fleet EV orders are considered more durable revenue than consumer sales, and the stock reacted sharply to the confirmation.",
+      "Raw material cost inflation — particularly lithium carbonate and aluminum — drove Rivian's cost-per-vehicle estimate above guidance. The battery supply chain crisis disproportionately affected start-up manufacturers lacking hedging scale.",
+      "Rivian announced a JV with a major Tier 1 auto supplier to develop next-generation battery packs, reducing LG Energy Solution dependency. The partnership signal suggested management was proactively addressing structural cost concerns.",
+      "A major institutional investor disclosed it had sold nearly its entire Rivian position in the prior quarter. The disclosure coincided with weak consumer sentiment data, and the forced-selling narrative amplified the downward move.",
+      "Rivian production data showed strong R1T and R1S reservation-to-delivery conversion rates. Wall Street had feared cancellations from price increases; the strong data reversed bearish sentiment and triggered a squeeze.",
+      "A fire at a battery cell supplier disrupted Rivian's production schedule for six weeks. The supply chain incident restarted concerns about single-supplier concentration risk across the EV ecosystem."
+    ]
+  },
+  {
+    "ticker": "SOFI", "name": "SoFi Technologies, Inc.", "sector": "Financial Services",
+    "price0": 8.0, "base_vol": 25000000, "drift": 0.08, "dvol": 0.038,
+    "shocks": {"50": 21, "100": -17, "165": 18, "235": -15, "300": 20, "380": -14, "450": 16},
+    "explanations": [
+      "SoFi received its national bank charter from the OCC, allowing it to hold deposits, lower funding costs, and compete directly with traditional banks. Volume was 7x average as long-only funds rotated into the name on the watershed approval.",
+      "Student loan moratorium extensions directly impacted SoFi's high-margin refinancing business. The repeated policy extension created persistent uncertainty around a core revenue stream, and the market sold the duration of the overhang.",
+      "SoFi's tech-platform segment reported accelerating B2B revenue, reframing the company as a banking-infrastructure provider rather than a consumer lender. The narrative shift attracted new institutional buyers seeking fintech exposure.",
+      "A competitor's aggressive rate-matching on high-yield savings triggered fears of a deposit rate war that could compress SoFi's net interest margin. The banking sector broadly sold off as deposit competition intensified.",
+      "SoFi crossed 6 million members ahead of guidance, driven by its Checking & Savings account launch. Member growth is a leading indicator of cross-sell revenue in SoFi's flywheel model, and the milestone drove a strong re-rating.",
+      "Another student loan moratorium extension rendered SoFi's refinancing pipeline effectively unmodelable for analysts. The persistent binary regulatory risk kept institutional buyers sidelined, with the anomaly driven by frustrated long sellers.",
+      "SoFi's insurance and investing products reported accelerating attach rates among checking account holders. The data suggested the cross-sell flywheel was functioning as designed, driving a gap-up open on above-average volume."
+    ]
+  },
+  {
+    "ticker": "HIMS", "name": "Hims & Hers Health, Inc.", "sector": "Healthcare",
+    "price0": 9.0, "base_vol": 6000000, "drift": 0.15, "dvol": 0.040,
+    "shocks": {"45": 28, "90": -18, "150": 22, "215": -16, "285": 19, "355": -15, "430": 24},
+    "explanations": [
+      "FDA approval of compounded semaglutide prescriptions positioned Hims as an unexpected beneficiary of the GLP-1 weight-loss drug wave, offering compounded versions at a fraction of branded costs. The stock gapped up 28% on 8x volume.",
+      "An FDA warning regarding compounded GLP-1 drugs raised existential risk around Hims's fastest-growing product line. The stock fell 18% as investors repriced the regulatory risk of compounding pharmacies operating near the frontier of approvals.",
+      "Hims reported subscriber growth of 85% year-over-year, well above the 55% consensus estimate. Accelerating growth in mental health and hair loss verticals demonstrated the platform's ability to expand beyond its core ED segment.",
+      "A prominent short-seller argued Hims's churn rates are materially understated and subscriber count includes inactive users. The report cited methodology flaws and led to an 18% intraday decline before partial recovery into close.",
+      "Hims launched a partnership with a major PBM, enabling prescriptions to be covered by commercial insurance for the first time. Removing the out-of-pocket cost barrier opened a significantly larger addressable market.",
+      "State medical boards in two jurisdictions moved to restrict telehealth prescribing of controlled substances, threatening a portion of Hims's psychiatry and anxiety medication business.",
+      "Hims's Q3 results showed gross margin expanding to 80%, ahead of most consumer healthcare peers, as the company scaled its fulfillment and compounding pharmacy infrastructure. The margin profile sparked a significant re-rating by growth funds."
+    ]
+  },
+  {
+    "ticker": "JOBY", "name": "Joby Aviation, Inc.", "sector": "Industrials",
+    "price0": 6.5, "base_vol": 5000000, "drift": 0.05, "dvol": 0.052,
+    "shocks": {"60": 30, "105": -22, "170": 18, "240": -20, "310": 25, "385": -17, "460": 21},
+    "explanations": [
+      "The FAA granted Joby a Part 135 air carrier certificate — the first ever for an electric air taxi operator. The milestone put Joby on a credible path to commercial revenue and triggered a 30% session gain on 10x volume.",
+      "A test flight incident — later confirmed minor — raised investor concern about certification timelines. Pre-revenue aerospace companies trade on regulatory milestones, and any setback is amplified by the optionality-heavy investor base.",
+      "Joby announced a strategic deployment partnership with a Middle Eastern sovereign wealth fund for urban air mobility operations in a flagship smart city, attracting new institutional interest in the international expansion thesis.",
+      "Rising interest rates increased the discount rate applied to Joby's long-dated pre-revenue cash flows, mechanically compressing DCF valuations. The rate sensitivity of pre-revenue aerospace companies was underappreciated by earlier holders.",
+      "Joby's manufacturing partnership with Toyota deepened with a $500M capital infusion, providing a multi-year runway and removing near-term dilution risk. Toyota's backing added credibility from one of the world's leading vehicle manufacturers.",
+      "A competitor's fatal accident in prototype testing cast a shadow over the entire eVTOL sector. Joby fell in sympathy despite no connection to the incident, illustrating the correlated risk among pre-commercial air taxi names.",
+      "Joby received FAA approval to conduct passenger-carrying commercial test flights — the final major regulatory hurdle before revenue generation. The milestone compressed the timeline to profitability and drove a sustained multi-day rally."
+    ]
+  }
+]
