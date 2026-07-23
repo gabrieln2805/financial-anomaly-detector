@@ -3,9 +3,9 @@ LLM-Powered Financial Anomaly Detection
 > **LLM-powered anomaly detection on financial time series.**  
 > Fetches OHLCV data via Yahoo Finance, runs a Z-score + IQR ensemble across three signals (returns, volume, realized volatility), then calls Claude to explain every flagged event in plain English with a risk score.
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-6366f1?style=flat-square&logo=github)](https://YOUR_USERNAME.github.io/financial-anomaly-detector)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-6366f1?style=flat-square&logo=github)](https://gabrieln2805.github.io/financial-anomaly-detector)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=flat-square&logo=python)](https://python.org)
-[![Build Demo](https://github.com/YOUR_USERNAME/financial-anomaly-detector/actions/workflows/build-demo.yml/badge.svg)](https://github.com/YOUR_USERNAME/financial-anomaly-detector/actions/workflows/build-demo.yml)
+[![Build Demo](https://github.com/gabrieln2805/financial-anomaly-detector/actions/workflows/build-demo.yml/badge.svg)](https://github.com/gabrieln2805/financial-anomaly-detector/actions/workflows/build-demo.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
 ---
@@ -164,7 +164,7 @@ An event fires if **at least one** signal triggers. Composite severity = sum of 
 1. Push this repo to GitHub.
 2. Go to **Settings → Pages → Source** → choose **GitHub Actions**.
 3. On the next push to `main`, the workflow builds `anomaly_demo.html` and deploys it.
-4. Your live demo will be at `https://YOUR_USERNAME.github.io/financial-anomaly-detector`.
+4. Your live demo will be at `https://gabrieln2805.github.io/financial-anomaly-detector`.
 
 To enable full LLM explanations in the deployed demo:  
 **Settings → Secrets → Actions** → add `ANTHROPIC_API_KEY`.
