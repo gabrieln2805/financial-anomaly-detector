@@ -157,27 +157,6 @@ An event fires if **at least one** signal triggers. Composite severity = sum of 
 
 ---
 
-## Deployment
-
-### GitHub Pages (automatic)
-
-1. Push this repo to GitHub.
-2. Go to **Settings → Pages → Source** → choose **GitHub Actions**.
-3. On the next push to `main`, the workflow builds `anomaly_demo.html` and deploys it.
-4. Your live demo will be at `https://gabrieln2805.github.io/financial-anomaly-detector`.
-
-To enable full LLM explanations in the deployed demo:  
-**Settings → Secrets → Actions** → add `ANTHROPIC_API_KEY`.
-
-### Manual (any static host)
-
-```bash
-python make_demo.py          # produces anomaly_demo.html
-# Upload anomaly_demo.html to S3, Netlify, Vercel, etc.
-```
-
----
-
 ## Use cases
 
 - **KYC / transaction monitoring** — adapt signals to payment velocity and counterparty concentration
@@ -187,6 +166,3 @@ python make_demo.py          # produces anomaly_demo.html
 
 ---
 
-## License
-
-MIT
