@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Financial Anomaly Detection — {{N_COMPANIES}} Companies</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg:#0a0f1e; --surface:#111827; --s2:#1a2236; --border:#1f2d45;
+    --text:#e2e8f0; --muted:#64748b; --accent:#6366f1;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;padding:1.5rem 2rem;}
+
+  .topbar{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem}
+  .topbar h1{font-size:1.5rem;font-weight:800}
+  .topbar p{font-size:.82rem;color:var(--muted);margin-top:.25rem}
+  .status-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block;margin-right:.4rem;box-shadow:0 0 6px #22c55e}
+
+  .selector-wrap{margin-bottom:1.75rem}
+  .selector-label{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.6rem}
+  .selector-row{display:flex;flex-wrap:wrap;gap:.5rem}
+  .co-pill{display:flex;flex-direction:column;gap:.1rem;background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:.5rem .85rem;cursor:pointer;transition:border-color .15s,background .15s;text-align:left}
+  .co-pill:hover{background:var(--s2);border-color:#334155}
+  .co-pill.active{background:var(--s2);border-color:var(--accent)}
+  .pill-ticker{font-size:.85rem;font-weight:800;color:var(--text)}
+  .pill-name{font-size:.68rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px}
+  .pill-sector{font-size:.62rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+
+  .kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:.75rem;margin-bottom:1.5rem}
+  .kpi{background:var(--surface);border:1px solid var(--border);border-radius:.65rem;padding:.9rem 1.1rem}
+  .kpi-label{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
+  .kpi-value{font-size:1.45rem;font-weight:700;margin-top:.25rem}
+  .kpi-sub{font-size:.72rem;color:var(--muted);margin-top:.1rem}
+
+  .chart-grid{display:grid;grid-template-columns:2fr 1fr;gap:1rem;margin-bottom:1rem}
+  .chart-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+  @media(max-width:900px){.chart-grid,.chart-row{grid-template-columns:1fr}}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.1rem 1.25rem}
+  .card-title{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.9rem}
+  .chart-wrap{position:relative;height:260px}
+  .chart-wrap.tall{height:310px}
+  .chart-wrap.sm{height:190px}
+
+  .section-hd{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.9rem;display:flex;align-items:center;gap:.5rem}
+  .section-hd span{background:var(--accent);color:#fff;font-size:.68rem;padding:.1rem .5rem;border-radius:99px}
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:.85rem;margin-bottom:2rem}
+  .anom-card{background:var(--s2);border:1px solid var(--border);border-radius:.7rem;padding:1rem 1.15rem}
+  .anom-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+  .anom-date{font-size:.82rem;font-weight:700;font-family:monospace}
+  .anom-sev{font-size:.82rem;font-weight:700}
+  .badges{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.6rem}
+  .badge{font-size:.66rem;font-weight:700;padding:.18rem .5rem;border-radius:99px;color:#fff}
+  .anom-metrics{display:flex;gap:.9rem;flex-wrap:wrap;font-size:.76rem;color:var(--muted);margin-bottom:.65rem}
+  .anom-metrics b{color:var(--text)}
+  .anom-expl{font-size:.8rem;color:#94a3b8;line-height:1.6;border-left:2px solid var(--accent);padding-left:.7rem}
+
+  footer{font-size:.7rem;color:var(--muted);text-align:center;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div>
+    <h1>LLM-Powered Financial Anomaly Detection</h1>
+    <p><span class="status-dot"></span>{{N_COMPANIES}} companies &nbsp;&middot;&nbsp; {{PERIOD}} lookback &nbsp;&middot;&nbsp; {{GENERATED_AT}}</p>
+  </div>
+</div>
+
+<div class="selector-wrap">
+  <div class="selector-label">Select company</div>
+  <div class="selector-row" id="pill-row">{{PILLS_HTML}}</div>
+</div>
+
+<div class="kpi-row">
+  <div class="kpi"><div class="kpi-label">Trading Days</div><div class="kpi-value" id="k-total">-</div><div class="kpi-sub">in lookback</div></div>
+  <div class="kpi"><div class="kpi-label">Anomalies</div><div class="kpi-value" id="k-anom" style="color:#ef4444">-</div><div class="kpi-sub" id="k-rate">-</div></div>
+  <div class="kpi"><div class="kpi-label">Multi-Signal</div><div class="kpi-value" id="k-multi" style="color:#f59e0b">-</div><div class="kpi-sub">2+ signals co-firing</div></div>
+  <div class="kpi"><div class="kpi-label">Avg Anomaly Return</div><div class="kpi-value" id="k-ret" style="color:#8b5cf6">-</div><div class="kpi-sub">absolute magnitude</div></div>
+  <div class="kpi"><div class="kpi-label">Detection Window</div><div class="kpi-value">20d</div><div class="kpi-sub">z-score + IQR</div></div>
+</div>
+
+<div class="chart-grid">
+  <div class="card">
+    <div class="card-title">Price Series with Anomaly Overlay</div>
+    <div class="chart-wrap tall"><canvas id="priceChart"></canvas></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Signal Breakdown</div>
+    <div class="chart-wrap"><canvas id="donutChart"></canvas></div>
+  </div>
+</div>
+
+<div class="chart-row">
+  <div class="card">
+    <div class="card-title">Volume (x Rolling Mean)</div>
+    <div class="chart-wrap sm"><canvas id="volChart"></canvas></div>
+  </div>
+  <div class="card">
+    <div class="card-title">20-Day Realized Volatility (%)</div>
+    <div class="chart-wrap sm"><canvas id="rvChart"></canvas></div>
+  </div>
+</div>
+
+<div class="section-hd">LLM-Explained Anomalies <span id="anom-count">0</span></div>
+<div class="cards-grid" id="cards-container"></div>
+
+<footer>
+  Signals: price return, volume, realized volatility &nbsp;&middot;&nbsp;
+  Method: z-score (|z|&gt;{{ZSCORE_THRESHOLD}}) + IQR ensemble &nbsp;&middot;&nbsp;
+  LLM: Claude {{LLM_MODEL}} (set ANTHROPIC_API_KEY) &nbsp;&middot;&nbsp;
+  Data: Yahoo Finance &nbsp;&middot;&nbsp; Not investment advice.
+</footer>
+
+<script>
+const COMPANIES = {{COMPANIES_JSON}};
+const FIRST = "{{FIRST_TICKER}}";
+const SIG_COLORS = { Return:"#f43f5e", Volume:"#f59e0b", Volatility:"#8b5cf6" };
+const GRID  = { color:"#1f2d45" };
+const TICKS = { color:"#64748b", maxTicksLimit:8 };
+
+let priceChart, donutChart, volChart, rvChart;
+
+function initCharts() {
+  const d = COMPANIES[FIRST];
+  priceChart = new Chart(document.getElementById("priceChart"), {
+    data: {
+      labels: d.dates,
+      datasets: [
+        { type:"line", label:"Close", data:d.closes,
+          borderColor:d.color, borderWidth:1.5, pointRadius:0, tension:.2, fill:false, yAxisID:"y" },
+        { type:"scatter", label:"Anomaly", data:d.anomScatter,
+          backgroundColor:"#ef4444", borderColor:"#fff", borderWidth:1.5,
+          pointRadius:7, pointHoverRadius:9, yAxisID:"y" }
+      ]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      interaction:{ mode:"index", intersect:false },
+      plugins:{
+        legend:{ labels:{ color:"#64748b", boxWidth:12 } },
+        tooltip:{ callbacks:{ label: ctx => ctx.dataset.label==="Anomaly"
+            ? ` Anomaly  $${ctx.parsed.y.toFixed(2)}`
+            : ` $${ctx.parsed.y.toFixed(2)}` } }
+      },
+      scales:{ x:{ ticks:{...TICKS,maxTicksLimit:10}, grid:GRID },
+               y:{ ticks:{...TICKS, callback:v=>"$"+v}, grid:GRID } }
+    }
+  });
+
+  donutChart = new Chart(document.getElementById("donutChart"), {
+    type:"doughnut",
+    data:{
+      labels: Object.keys(d.sigCounts),
+      datasets:[{ data:Object.values(d.sigCounts),
+                  backgroundColor:["#f43f5e","#f59e0b","#8b5cf6"],
+                  borderWidth:2, borderColor:"#111827" }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false, cutout:"65%",
+      plugins:{ legend:{ position:"bottom", labels:{ color:"#64748b", padding:12, boxWidth:12 } } }
+    }
+  });
+
+  const anomSet = new Set(d.anomDates);
+  volChart = new Chart(document.getElementById("volChart"), {
+    type:"bar",
+    data:{
+      labels:d.dates,
+      datasets:[{ label:"Vol x", data:d.volMult,
+                  backgroundColor:d.dates.map(dt => anomSet.has(dt)?"rgba(244,63,94,.8)":"rgba(99,102,241,.35)"),
+                  borderWidth:0 }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ display:false } },
+      scales:{ x:{ display:false }, y:{ ticks:TICKS, grid:GRID } }
+    }
+  });
+
+  rvChart = new Chart(document.getElementById("rvChart"), {
+    type:"line",
+    data:{
+      labels:d.dates,
+      datasets:[{ label:"RVol %", data:d.rv,
+                  borderColor:"#8b5cf6", borderWidth:1.5,
+                  pointRadius:0, fill:true,
+                  backgroundColor:"rgba(139,92,246,.15)", tension:.3 }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ display:false } },
+      scales:{ x:{ display:false }, y:{ ticks:{...TICKS, callback:v=>v+"%"}, grid:GRID } }
+    }
+  });
+}
+
+function updateKPIs(d) {
+  document.getElementById("k-total").textContent = d.kpis.nTotal.toLocaleString();
+  document.getElementById("k-anom").textContent  = d.kpis.nAnom;
+  document.getElementById("k-rate").textContent  = d.kpis.anomRate + "% of sessions";
+  document.getElementById("k-multi").textContent = d.kpis.multiSig;
+  document.getElementById("k-ret").textContent   = d.kpis.avgRetAnom + "%";
+}
+
+function sevColor(s, max) {
+  const r = Math.min(s / Math.max(max,1), 1);
+  return r > .66 ? "#ef4444" : r > .33 ? "#f59e0b" : "#22c55e";
+}
+
+function renderCards(expls) {
+  const maxSev = Math.max(...expls.map(e => e.severity), 1);
+  return [...expls].sort((a,b) => b.severity - a.severity).map(e => {
+    const retColor = e.return_pct >= 0 ? "#22c55e" : "#ef4444";
+    const retSign  = e.return_pct >= 0 ? "+" : "";
+    const badges   = (e.signals||[]).map(s =>
+      `<span class="badge" style="background:${SIG_COLORS[s]||"#6b7280"}">${s}</span>`
+    ).join("");
+    return `
+    <div class="anom-card">
+      <div class="anom-header">
+        <div class="anom-date">${e.date}</div>
+        <div class="anom-sev" style="color:${sevColor(e.severity,maxSev)}">&#9889; ${e.severity.toFixed(1)}</div>
+      </div>
+      <div class="badges">${badges}</div>
+      <div class="anom-metrics">
+        <span>Close <b>$${e.close}</b></span>
+        <span>Return <b style="color:${retColor}">${retSign}${e.return_pct}%</b></span>
+        <span>Volume <b>${e.vol_mult}x</b></span>
+        <span>RVol <b>${e.realized_vol}%</b></span>
+      </div>
+      <p class="anom-expl">${e.explanation}</p>
+    </div>`;
+  }).join("");
+}
+
+function switchCompany(ticker) {
+  const d = COMPANIES[ticker];
+  document.querySelectorAll(".co-pill").forEach(p => p.classList.remove("active"));
+  const pill = document.getElementById("pill-" + ticker);
+  if (pill) pill.classList.add("active");
+
+  updateKPIs(d);
+
+  priceChart.data.labels = d.dates;
+  priceChart.data.datasets[0].data        = d.closes;
+  priceChart.data.datasets[0].borderColor = d.color;
+  priceChart.data.datasets[1].data        = d.anomScatter;
+  priceChart.update("none");
+
+  donutChart.data.datasets[0].data = Object.values(d.sigCounts);
+  donutChart.update("none");
+
+  const anomSet = new Set(d.anomDates);
+  volChart.data.labels = d.dates;
+  volChart.data.datasets[0].data = d.volMult;
+  volChart.data.datasets[0].backgroundColor = d.dates.map(dt =>
+    anomSet.has(dt) ? "rgba(244,63,94,.8)" : "rgba(99,102,241,.35)"
+  );
+  volChart.update("none");
+
+  rvChart.data.labels = d.dates;
+  rvChart.data.datasets[0].data = d.rv;
+  rvChart.update("none");
+
+  document.getElementById("anom-count").textContent = d.explanations.length;
+  document.getElementById("cards-container").innerHTML = renderCards(d.explanations);
+}
+
+initCharts();
+switchCompany(FIRST);
+</script>
+</body>
+</html>
