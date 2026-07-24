@@ -106,7 +106,8 @@ def top_anomalies(anom: pd.DataFrame, n: int = TOP_ANOMALIES) -> pd.DataFrame:
 # ══════════════════════════════════════════════════════════════════════════════
 
 def _build_context(row, df: pd.DataFrame, ticker: str) -> str:
-    date     = row["Date"].strftime("%Y-%m-%d") if hasattr(row["Date"], "strftime") else str(row["Date"])
+    date = (row["Date"].strftime("%Y-%m-%d") if hasattr(row["Date"], "strftime")
+            else str(row["Date"]))
     ret_pct  = row.get("return_pct", 0)
     vol_mult = row.get("volume_multiple", 1)
     real_vol = row.get("realized_vol", 0)
@@ -124,7 +125,8 @@ def _build_context(row, df: pd.DataFrame, ticker: str) -> str:
         idx = df.index.get_loc(row["Date"])
         win = df.iloc[max(0, idx-2): idx+3]
         ctx = "\n".join(
-            f"  {d.date()} close={r['Close']:.2f} ret={r['return_pct']:+.2f}% vol={r['volume_multiple']:.1f}x"
+            f"  {d.date()} close={r['Close']:.2f} ret={r['return_pct']:+.2f}% "
+            f"vol={r['volume_multiple']:.1f}x"
             for d, r in win.iterrows()
         )
     except Exception:
@@ -192,8 +194,10 @@ def explain_anomalies(top: pd.DataFrame, df: pd.DataFrame, ticker: str) -> list:
         if row.get("flag_vol"):
             fired.append("Volatility")
 
+        row_date = (row["Date"].strftime("%Y-%m-%d") if hasattr(row["Date"], "strftime")
+                    else str(row["Date"]))
         results.append({
-            "date":         row["Date"].strftime("%Y-%m-%d") if hasattr(row["Date"], "strftime") else str(row["Date"]),
+            "date":         row_date,
             "close":        round(float(row.get("Close", 0)), 2),
             "return_pct":   round(float(row.get("return_pct", 0)), 2),
             "vol_mult":     round(float(row.get("volume_multiple", 1)), 1),
