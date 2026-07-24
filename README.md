@@ -10,6 +10,9 @@ LLM-Powered Financial Anomaly Detection
 
 ---
 
+<img width="2720" height="2960" alt="anomaly_detector_pipeline" src="https://github.com/user-attachments/assets/13ef89c9-69ba-420f-8e1b-e456db31bffd" />
+
+
 ## How it works
 
 ```
